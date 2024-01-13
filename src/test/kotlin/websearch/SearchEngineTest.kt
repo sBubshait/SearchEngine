@@ -57,9 +57,9 @@ class SearchEngineTest {
 
   private val downloadedPages =
     mapOf(
-      URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting") to testingMainPage,
-      URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting/nature.html") to testingNaturePage,
-      URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting/tech.html") to testingTechPage
+      "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting" to testingMainPage,
+      "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting/nature.html" to testingNaturePage,
+      "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting/tech.html" to testingTechPage
     )
 
   @Test

@@ -8,14 +8,14 @@ class CrawlerTests {
   fun `can crawl a single page`() {
     val crawler =
       WebCrawler(
-        URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting"),
+        "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting",
         maximumPages = 1
       )
     crawler.run()
     val result = crawler.dump()
     assertEquals(1, result.size)
     assertEquals(
-      URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting"),
+      "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting",
       result.keys.first()
     )
     val searchEngine = SearchEngine(result)
@@ -34,15 +34,15 @@ class CrawlerTests {
   fun `can extract all links recursively, with limit`() {
     val crawler =
       WebCrawler(
-        URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting"),
+        "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting",
         maximumPages = 4
       )
     crawler.run()
     val result = crawler.dump()
-    // we currently do not allow relative links, so we only have 2 pages.
-    assertEquals(2, result.size)
+    // results now include relative links as well :)
+    assertEquals(4, result.size)
     assertEquals(
-      URL("https://www.doc.ic.ac.uk/~sb3923/crawlerTesting"),
+      "https://www.doc.ic.ac.uk/~sb3923/crawlerTesting",
       result.keys.first()
     )
     val searchEngine = SearchEngine(result)
@@ -58,11 +58,11 @@ class CrawlerTests {
   }
 
   private fun assertResultsMatch(
-    url: String,
+    url: URL,
     count: Int,
     result: SearchResult
   ) {
-    assertEquals(URL(url), result.url)
+    assertEquals(url, result.url)
     assertEquals(count, result.numRefs)
   }
 }

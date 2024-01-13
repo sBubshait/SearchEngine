@@ -1,5 +1,7 @@
 package websearch
 
+import org.jsoup.Jsoup
+
 class WebCrawler(
   private val startingURL: URL,
   private var maximumPages: Int = 10,
@@ -14,7 +16,7 @@ class WebCrawler(
   }
 
   private fun crawl(url: URL) {
-    val currentPage = url.download()
+    val currentPage = download(url)
     crawlOnePage(url, currentPage)
     val links = currentPage.extractLinks().filterNot { exclude.contains(it) }
     links.take(if (maximumPages < 0) 0 else maximumPages).forEach {
@@ -26,7 +28,7 @@ class WebCrawler(
 
   private fun crawlOnePage(
     url: URL,
-    wp: WebPage = url.download()
+    wp: WebPage = download(url)
   ) {
     if (maximumPages-- <= 0 || exclude.contains(url))
       return
@@ -39,10 +41,20 @@ class WebCrawler(
   }
 }
 
+private fun download(url: URL): WebPage {
+  return try {
+    WebPage(Jsoup.connect(url).get())
+  } catch (e: Exception) {
+    WebPage(Jsoup.parse(""))
+  }
+}
 fun main() {
-  val crawler = WebCrawler(startingURL = URL("http://www.bbc.co.uk"))
-  crawler.run()
-  val searchEngine = SearchEngine(crawler.dump())
-  searchEngine.compileIndex()
+//  val crawler = WebCrawler(startingURL = "http://www.bbc.co.uk")
+//  crawler.run()
+//  val searchEngine = SearchEngine(crawler.dump())
+//  searchEngine.compileIndex()
+  val searchEngine = SearchEngine().loadIndex("index")
   println(searchEngine.searchFor("news"))
+//  println(searchEngine.searchFor("news"))
+//  searchEngine.saveIndex("index")
 }

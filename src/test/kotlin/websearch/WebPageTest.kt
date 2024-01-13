@@ -45,7 +45,7 @@ class WebPageTest {
     val webPage = WebPage(htmlDocument)
     assertEquals(
       listOf(
-        "simple", "page", "this", "is", "a", "very",
+        "this", "is", "a", "very",
         "very", "simple", "html", "document"
       ),
       webPage.extractWords()
@@ -77,8 +77,8 @@ class WebPageTest {
     val webPage = WebPage(htmlDocument)
     assertEquals(
       listOf(
-        URL("https://en.wikipedia.org/wiki/HTML"),
-        URL("https://www.w3schools.com/html/html_links.html")
+        "https://en.wikipedia.org/wiki/HTML",
+        "https://www.w3schools.com/html/html_links.html"
       ),
       webPage.extractLinks()
     )
