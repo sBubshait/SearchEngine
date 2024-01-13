@@ -33,11 +33,22 @@ class SearchEngine(private val data: Map<URL, WebPage> = emptyMap(),
   }
 
   fun searchFor(query: String): SearchResultSummary {
-    // calculate time taken in seconds
     val start = System.currentTimeMillis()
-    val result = index.getOrDefault(query.lowercase(), listOf())
+
+    val words = filterWords (query.lowercase().split(" ").map { it.trim() })
+
+    val aggregatedResults = words.flatMap { word ->
+      index.getOrDefault(word, listOf())
+    }.groupBy { it.url }
+      .mapValues { (_, results) ->
+        results.fold(0) { sum, result -> sum + result.numRefs }
+      }
+      .map { SearchResult(it.key, it.value) }
+
+    val result = aggregatedResults.sortedByDescending { it.numRefs }
+
     val end = System.currentTimeMillis()
-    return SearchResultSummary(query, index.getOrDefault(query, listOf()), pageCount, end - start)
+    return SearchResultSummary(query, result, pageCount, end - start)
   }
 
   fun saveIndex(filename: String) {

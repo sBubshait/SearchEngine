@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     ext.kotlin_version = "1.9.0"
     ext.jvm_version = 17
-//    ext.kotlinter_version = "3.15.0"
     repositories {
         mavenCentral()
     }
@@ -16,7 +15,6 @@ buildscript {
 plugins {
     id 'application'
     id 'org.jetbrains.kotlin.jvm' version "$kotlin_version"
-//    id 'org.jmailen.kotlinter' version "$kotlinter_version"
 }
 
 group = 'me.bubshait'

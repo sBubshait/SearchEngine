@@ -53,8 +53,11 @@ fun main() {
 //  crawler.run()
 //  val searchEngine = SearchEngine(crawler.dump())
 //  searchEngine.compileIndex()
-  val searchEngine = SearchEngine().loadIndex("index")
-  println(searchEngine.searchFor("news"))
+//  val searchEngine = SearchEngine().loadIndex("index")
+//  println(searchEngine.searchFor("news"))
 //  println(searchEngine.searchFor("news"))
 //  searchEngine.saveIndex("index")
+//  val crawler = WebCrawler(startingURL = "https://www.bbc.co.uk/news", maximumPages = 20)
+//  crawler.run()
+//  println(crawler.dump())
 }
