@@ -5,10 +5,10 @@ fun main(args: Array<String>) {
   println("Welcome to the Web Search Engine! 🕸️")
 
   while (true) {
-    if (searchEngine.index.isEmpty()) {
+    if (searchEngine.isEmpty()) {
       println("No Index loaded.")
     } else {
-      println("Index loaded.")
+      println("Index loaded: ${searchEngine.getPageCount()} pages indexed.")
     }
 
     println(
@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
     when (input) {
       "1" -> crawl()
       "2" -> while (true) {
-        if (searchEngine.index.isEmpty()) {
+        if (searchEngine.isEmpty()) {
           println("No Index loaded. Please crawl a website first.")
           break
         }
@@ -48,6 +48,11 @@ fun main(args: Array<String>) {
         searchEngine = searchEngine.loadIndex(filename)
       }
       "4" -> {
+        if (searchEngine.isEmpty()) {
+          println("No index to be saved. Please start crawling first.")
+          break
+        }
+
         val filename = prompt(
           message = "Enter the filename you want to save the index to",
           validator = { it.isNotBlank() },
@@ -59,7 +64,7 @@ fun main(args: Array<String>) {
         println("Exiting...")
         break
       }
-      else -> println("Invalid option, please enter a number between 1 and 3.")
+      else -> println("Invalid option, please enter a number between 1 and 5.")
     }
   }
 }
@@ -94,32 +99,3 @@ private fun prompt(message: String, validator: (String) -> Boolean, errorMessage
     }
   }
 }
-
-//fun main(args: Array<String>) {
-
-
-//  var currentlyCrawling = false
-//
-//  println("Welcome to the Web Search Engine! 🕸️")
-//  println("Current Index: ")
-//  println("Choose an option:" +
-//    "\n1. Crawl a website" +
-//    "\n2. Search for a word" +
-//    "\n3. Exit")
-//  args.forEachIndexed { index, arg ->
-//    println("Arg $index: $arg")
-//  }
-//
-//  fun crawl() {
-//    println("Enter the starting URL you want to crawl:")
-//    val url = readLine()!!
-//    println("Enter the maximum number of pages you want to crawl:")
-//    val maxPages = readLine()!!.toInt()
-//    val crawler = WebCrawler(url, maxPages)
-//    crawler.run()
-//    val searchEngine = SearchEngine(crawler.dump())
-//    searchEngine.compileIndex()
-//    searchEngine.saveIndex("index")
-//    println("Crawling completed successfully!")
-//  }
-//}
