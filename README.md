@@ -6,6 +6,7 @@ A simple web search engine in Kotlin, including a web crawler, indexer, and quer
 
 ## Demo
 The following is a demo of the searching functinoality. The index was compiled based on over 7,000 pages of the BBC news. It can be seen that the search is completed in single digit milliseconds.
+
 ![searchengine-demo](https://github.com/sBubshait/SearchEngine/assets/44058159/845e8e6b-ef91-4a73-85c6-3a0a1a8957aa)
 
 For copyright and legal purposes, the index file is not uploaded. However, you are welcome to try crawling and searching locally yourself (: 
