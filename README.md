@@ -5,6 +5,7 @@
 A simple web search engine in Kotlin, including a web crawler, indexer, and query engine.
 
 ## Demo
+![Uploading searchengine-demo.gif…]()
 
 
 
