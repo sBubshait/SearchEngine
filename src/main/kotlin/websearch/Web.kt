@@ -1,6 +1,7 @@
 package websearch
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.io.File
 
 typealias URL = String
 
@@ -32,6 +33,19 @@ class WebPage(private val doc: Document) {
   }
 }
 
+  fun fromFile(filename: String): WebPage {
+    return WebPage(Jsoup.parse(File(filename), "UTF-8"))
+  }
+
+// use if you want to index downloaded HTML pages without directly crawling them using this tool.
+  fun fromDirectory(directory: String, prefix: String = ""): Map<URL, WebPage> {
+    return File(directory).walkTopDown()
+      .filter { it.isFile }
+      .filter { it.extension == "html" }
+      .map { prefix + it.nameWithoutExtension to fromFile(it.absolutePath) }
+      .toMap()
+  }
+
  fun filterWords(words: List<String>): List<String> {
   return words.filterNot { it.isEmpty() }
     .filterNot { it.length < 3 }
@@ -39,6 +53,7 @@ class WebPage(private val doc: Document) {
     .filterNot { it.contains(Regex("[^a-zA-Z0-9]")) } // only English words
     .filterNot { punctuation.contains(it) }
 }
+
 
 private val punctuation = listOf(
   ",", ".", "!", "?", ";", ":", "(", ")", "[", "]", "{", "}", "<", ">", "/", "\\", "|", "\"", "'", "`", "~", "@", "#", "$", "%", "^", "&", "*", "-", "_", "+", "=", "–", "—"

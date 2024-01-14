@@ -1,6 +1,7 @@
 package websearch
 
 var searchEngine = SearchEngine()
+
 fun main(args: Array<String>) {
   println("Welcome to the Web Search Engine! 🕸️")
 
@@ -8,13 +9,13 @@ fun main(args: Array<String>) {
     if (searchEngine.isEmpty()) {
       println("No Index loaded.")
     } else {
-      println("Index loaded: ${searchEngine.getPageCount()} pages indexed.")
+     println("Index loaded: ${searchEngine.getPageCount()} pages indexed.")
     }
 
     println(
       "Choose an option:" +
         "\n1. Start Crawling" +
-        "\n2. Search for a word" +
+        "\n2. Search" +
         "\n3. Load Index from file" +
         "\n4. Save Index to file" +
         "\n5. Exit"

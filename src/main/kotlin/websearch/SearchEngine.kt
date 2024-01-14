@@ -13,7 +13,7 @@ class SearchEngine(private val data: Map<URL, WebPage> = emptyMap(),
   fun compileIndex() {
     val pairs =
       data.flatMap { (url, page) ->
-        page.extractWords().map { it to url }
+        filterWords(page.extractWords()).map { it to url }
       }
     val grouped = pairs.groupBy({ it.first }, { it.second })
 
@@ -112,6 +112,10 @@ class SearchResultSummary(val query: String,
     if (pagesCount == 0) {
       return "Results for \"$query\":\n" + results.joinToString("\n") { " $it" }
     }
-    return "Searched $pagesCount pages (${"%.2f".format(timeTaken.toDouble() / 1000)} seconds). About ${results.size} Results for \"$query\":\n" + results.joinToString("\n") { " $it" }
+
+    return "Searched $pagesCount pages (${"%.2f".format(timeTaken.toDouble() / 1000)} seconds). About ${results.size} Results for \"$query\". Top 5 results:\n" + results
+      .take(5)
+      .joinToString("\n") { " $it" }
+
   }
 }

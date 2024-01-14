@@ -4,6 +4,10 @@
 
 A simple web search engine in Kotlin, including a web crawler, indexer, and query engine.
 
+## Demo
+
+
+
 ## Features
 
 - [x] Simple Web Crawler: Crawls the web from a a given seed URL with a maximum number of pages to crawl, and generates a list of URLs and their corresponding page contents.
@@ -22,5 +26,16 @@ A simple web search engine in Kotlin, including a web crawler, indexer, and quer
 - [ ] Support for more languages: Currently only supports English.
 - [ ] Currently only supports a single index. Support multiple indexes. Allow for distributed indexing.
 
+## Usage
 
+### Build
 
+```bash
+./gradlew build
+```
+
+### Run
+
+```bash
+./gradlew run --console=plain 
+```

@@ -19,6 +19,7 @@ class WebCrawler(
     val currentPage = download(url)
     crawlOnePage(url, currentPage)
     val links = currentPage.extractLinks().filterNot { exclude.contains(it) }
+
     links.take(if (maximumPages < 0) 0 else maximumPages).forEach {
       crawlOnePage(it)
     }
@@ -48,16 +49,4 @@ private fun download(url: URL): WebPage {
     WebPage(Jsoup.parse(""))
   }
 }
-fun main() {
-//  val crawler = WebCrawler(startingURL = "http://www.bbc.co.uk")
-//  crawler.run()
-//  val searchEngine = SearchEngine(crawler.dump())
-//  searchEngine.compileIndex()
-//  val searchEngine = SearchEngine().loadIndex("index")
-//  println(searchEngine.searchFor("news"))
-//  println(searchEngine.searchFor("news"))
-//  searchEngine.saveIndex("index")
-//  val crawler = WebCrawler(startingURL = "https://www.bbc.co.uk/news", maximumPages = 20)
-//  crawler.run()
-//  println(crawler.dump())
-}
+

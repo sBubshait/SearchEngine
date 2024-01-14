@@ -51,3 +51,11 @@ test {
         events "PASSED", "FAILED", "SKIPPED"
     }
 }
+
+application {
+    mainClass.set("websearch.CliKt")
+}
+
+run {
+    standardInput = System.in
+}
